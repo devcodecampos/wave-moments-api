@@ -1,20 +1,18 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import express from "express";
-import { Request, Response } from "express";
-import cors from "cors";
+import { startDatabase } from "./services/database/data-source";
+import { startWebServer } from "./app";
 
-const app = express();
-const port = process.env.SERVER_PORT;
+async function main() {
+  try {
+    await startDatabase();
+    console.log(`Database initialized`);
+    await startWebServer();
+    console.log(`Web server initialized`);
+  } catch (error) {
+    console.log(error, "Error initializing app");
+  }
+}
 
-app.use(express.json());
-app.use(cors());
-
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Hello World" });
-});
-
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
-});
+main();
