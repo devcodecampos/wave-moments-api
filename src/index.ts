@@ -1,0 +1,1 @@
+console.log("typescript and eslint setup");
