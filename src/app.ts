@@ -1,6 +1,6 @@
 import express from "express";
-import { Request, Response } from "express";
 import cors from "cors";
+import { UserRoutes } from "./modules/users/routes/user.routes";
 
 export const app = express();
 const port = process.env.SERVER_PORT;
@@ -8,9 +8,7 @@ const port = process.env.SERVER_PORT;
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Hello World" });
-});
+app.use("/users", UserRoutes());
 
 export async function startWebServer() {
   return new Promise((resolve) => {

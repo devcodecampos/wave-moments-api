@@ -14,7 +14,11 @@ export const AppDataSource = new DataSource({
   username: DATABASE_USERNAME,
   password: DATABASE_PASSWORD,
   database: DATABASE_DATABASE,
-  entities: [],
+  entities: [
+    process.env.NODE_ENV === "production"
+      ? "dist/src/modules/**/*.entity.js"
+      : "src/modules/**/*.entity.ts",
+  ],
   synchronize: true,
 });
 
