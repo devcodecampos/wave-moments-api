@@ -18,5 +18,8 @@ export const UserRoutes = (): Router => {
   // PATCH /users/:user_id
   router.patch("/:user_id", UserController.updateUser);
 
+  // POST /users/auth
+  router.post("/auth", UserController.authenticate);
+
   return router;
 };

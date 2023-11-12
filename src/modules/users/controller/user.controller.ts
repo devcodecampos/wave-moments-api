@@ -2,6 +2,7 @@ import { AppDataSource } from "../../../services/database/data-source";
 import { User } from "../entities/user.entity";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 class UserController {
   async createUser(req: Request, res: Response) {
@@ -123,6 +124,36 @@ class UserController {
     } catch (error) {
       console.log(error, "Error In DeleteUser");
       res.status(500).send({ ok: false, error: "Error Deleting User" });
+    }
+  }
+
+  async authenticate(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    try {
+      const user = await AppDataSource.getRepository(User).findOne({
+        where: { email: email },
+        select: ["id", "password_hash"],
+      });
+
+      if (!user) {
+        return res.status(404).json({ ok: false, error: "User Not Found" });
+      }
+
+      if (!bcrypt.compareSync(password, user.password_hash)) {
+        return res.status(401).json({ ok: false, error: "Invalid Password" });
+      }
+
+      const token = jwt.sign(
+        { id: user.id },
+        process.env.JWT_SECRET as string,
+        { expiresIn: "1d" }
+      );
+
+      return res.status(200).json({ ok: true, token });
+    } catch (error) {
+      console.log(error, "Error In Authenticate");
+      res.status(500).send({ ok: false, error: "Error Authenticating User" });
     }
   }
 }
