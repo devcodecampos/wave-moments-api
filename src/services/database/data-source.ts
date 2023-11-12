@@ -4,7 +4,7 @@ const {
   DATABASE_HOST,
   DATABASE_USERNAME,
   DATABASE_PASSWORD,
-  DATABASE_DATABASE,
+  DATABASE_NAME,
 } = process.env;
 
 export const AppDataSource = new DataSource({
@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
   port: 5432,
   username: DATABASE_USERNAME,
   password: DATABASE_PASSWORD,
-  database: DATABASE_DATABASE,
+  database: DATABASE_NAME,
   entities: [
     process.env.NODE_ENV === "production"
       ? "dist/src/modules/**/*.entity.js"
