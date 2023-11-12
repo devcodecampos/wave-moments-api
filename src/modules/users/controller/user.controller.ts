@@ -41,7 +41,7 @@ class UserController {
   async findAllUsers(req: Request, res: Response) {
     try {
       const users = await AppDataSource.getRepository(User).find({
-        select: ["id", "name", "bio", "followers_count", "followers_count"],
+        select: ["id", "name", "bio", "followers_count", "following_count"],
       });
 
       if (!users) {
@@ -62,7 +62,7 @@ class UserController {
 
     try {
       const user = await AppDataSource.getRepository(User).findOne({
-        select: ["id", "name", "bio", "followers_count", "followers_count"],
+        select: ["id", "name", "bio", "followers_count", "following_count"],
         where: { id: +user_id },
       });
 
