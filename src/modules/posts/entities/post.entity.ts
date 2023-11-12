@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { User } from "../../users/entities/user.entity";
 
 @Entity("posts")
 export class Post {
@@ -18,6 +21,9 @@ export class Post {
   @Column()
   description: string;
 
+  @Column()
+  user_id: number;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -26,4 +32,8 @@ export class Post {
 
   @DeleteDateColumn()
   deleted_at: Date;
+
+  @ManyToOne(() => User, (user) => user.posts)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 }
