@@ -5,10 +5,11 @@ import { User } from "../../users/entities/user.entity";
 
 class PostController {
   async createPost(req: Request, res: Response) {
+    const { description, image_url } = req.body;
+
     try {
       const requestingUser = res.locals.user as User;
 
-      const { description, image_url } = req.body;
       const post = await AppDataSource.getRepository(Post).save({
         image_url,
         description,

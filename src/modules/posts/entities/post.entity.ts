@@ -18,7 +18,7 @@ export class Post {
   @Column()
   image_url: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @Column()
