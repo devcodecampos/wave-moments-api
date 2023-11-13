@@ -1,11 +1,12 @@
 import { Router } from "express";
 import UserController from "../controller/user.controller";
+import { validateUserCreationMiddleware } from "../middlewares/validate-user-creation.middleware";
 
 export const UserRoutes = (): Router => {
   const router = Router();
 
   // POST /users
-  router.post("/", UserController.createUser);
+  router.post("/", validateUserCreationMiddleware, UserController.createUser);
   // GET /users
   router.get("/", UserController.findAllUsers);
 
