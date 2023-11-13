@@ -1,6 +1,7 @@
 import { Router } from "express";
 import UserController from "../controller/user.controller";
 import { validateUserCreationMiddleware } from "../middlewares/validate-user-creation.middleware";
+import { validateAuthTokenCreationMiddleware } from "../middlewares/validate-auth-token-creation.middleware";
 
 export const UserRoutes = (): Router => {
   const router = Router();
@@ -20,7 +21,7 @@ export const UserRoutes = (): Router => {
   router.patch("/:user_id", UserController.updateUser);
 
   // POST /users/auth
-  router.post("/auth", UserController.authenticate);
+  router.post("/auth", validateAuthTokenCreationMiddleware, UserController.authenticate);
 
   return router;
 };
