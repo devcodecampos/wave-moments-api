@@ -18,17 +18,40 @@ Este projeto está sendo desenvolvido utilizando as seguintes tecnologias:
 - [TypeORM](https://typeorm.io/)
 - [Postgres](https://www.postgresql.org/)
 - [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [Git](https://git-scm.com/)
 
 ## 🧱 Estrutura do Projeto <a name="estrutura"></a>
 ```
-src      
+src
+└───commons
+      └───middlewares
+            └───validate-user-auth.middleware.ts      
 └───modules
+      └───comments
+            └───controller
+                  └───comment.controller.ts
+            └───entities
+                  └───comment.entity.ts
+            └───routes
+                  └───comment.routes.ts
+      └───posts
+            └───controller
+                  └───post.controller.ts
+            └───entities
+                  └───post.entity.ts
+            └───middlewares
+                  └───validate-post-creation.middleware.ts
+            └───routes
+                  └───post.routes.ts
       └───users
             └───controller
                   └───user.controller.ts
             └───entities
                   └───user.entity.ts
+            └───middlewares
+                  └───validate-auth-token-creation.middleware.ts
+                  └───validate-user-creation.middleware.ts
             └───routes
                   └───user.routes.ts
 └───services
@@ -50,22 +73,22 @@ yarn.lock
 **Entidades Principais:**
 
 - [X] **Usuário:** Com informações como nome de usuário, senha, e-mail, bio e número de seguidores/seguindo. 
-- [ ] **Publicação:** Contendo dados como imagem, legenda, data/hora de postagem.
-- [ ] **Comentário:** Relacionado a uma publicação e a um usuário, com texto e data/hora de postagem.
+- [X] **Publicação:** Contendo dados como imagem, legenda, data/hora de postagem.
+- [X] **Comentário:** Relacionado a uma publicação e a um usuário, com texto e data/hora de postagem.
 - [ ] **Curtida:** Associada a uma publicação e a um usuário.
 - [ ] **Bônus:** Story
 
 **Relacionamentos Principais:**
 
-- [ ] Um usuário pode ter **muitas publicações**.
+- [X] Um usuário pode ter **muitas publicações**.
 - [ ] Uma publicação pode receber **muitos comentários** e **muitas curtidas**.
-- [ ] Um comentário está **associado a um único usuário e a uma única publicação**.
+- [X] Um comentário está **associado a um único usuário e a uma única publicação**.
 
 **Requisitos Funcionais Básicos:**
 
-- [ ] **Autenticação de Usuário:** Permitir que usuários se cadastrem e façam login.
-- [ ] **Publicar Conteúdo:** Usuários podem criar publicações com uma legenda.
-- [ ] **Comentar Publicações:** Comentar e remover comentários em publicações existentes.
+- [X] **Autenticação de Usuário:** Permitir que usuários se cadastrem e façam login.
+- [X] **Publicar Conteúdo:** Usuários podem criar publicações com uma legenda.
+- [X] **Comentar Publicações:** Comentar e remover comentários em publicações existentes.
 - [ ] **Curtir e descurtir Publicações:** Usuários podem dar "like" em publicações.
 - [ ] **Feed de Publicações:** Mostrar as publicações dos usuários que o usuário atual segue.
 
@@ -87,6 +110,7 @@ DATABASE_USERNAME = postgres "O nome de usuário usado para autenticar no banco"
 DATABASE_PASSWORD = 123456 "A senha associada ao usuário do banco"
 DATABASE_NAME = wave_moments "O nome do banco ao qual deseja se conectar"
 SERVER_PORT=3333 "A porta na qual o servidor do seu aplicativo será executado"
+JWT_SECRET = JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ "A sua chave secreta do JWT"
 ```
 
 ## 📚 Dependencias <a name="dependencias"></a>
@@ -106,11 +130,13 @@ yarn run eslint --init
 [Express](https://expressjs.com/)
 ```
 yarn add express
+yarn add -D @types/express
 ```
 [TypeORM](https://typeorm.io/)
 ```
 yarn add typeorm 
 yarn add reflect-metadata
+yarn add -D @types/typeorm
 ```
 [Postgres](https://www.postgresql.org/)
 ```
@@ -119,14 +145,21 @@ yarn add pg pg-hstore
 [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 ```
 yarn add bcrypt
+yarn add -D @types/bcrypt
 ```
 [Cors](https://github.com/expressjs/cors)
 ```
 yarn add cors
+yarn add -D @types/cors
 ```
 [Dotenv](https://www.npmjs.com/package/dotenv)
 ```
 yarn add dotenv
+```
+[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+```
+yarn add jsonwebtoken
+yarn add -D @types/jsonwebtoken
 ```
 
 ## 📝 Licença <a name="license"></a>
