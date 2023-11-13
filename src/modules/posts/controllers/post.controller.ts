@@ -26,7 +26,7 @@ class PostController {
   async findAllPosts(req: Request, res: Response) {
     try {
       const posts = await AppDataSource.getRepository(Post).find({
-        relations: ["user"],
+        relations: ["user", "comments"],
       });
 
       return res.status(200).send({ ok: true, posts });
