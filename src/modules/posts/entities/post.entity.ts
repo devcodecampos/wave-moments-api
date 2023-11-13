@@ -5,10 +5,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { User } from "../../users/entities/user.entity";
+import { Comment } from "../../comments/entities/comment.entity";
 
 @Entity("posts")
 export class Post {
@@ -20,7 +22,7 @@ export class Post {
 
   @Column({ nullable: true })
   description: string;
-
+  
   @Column()
   user_id: number;
 
@@ -36,4 +38,7 @@ export class Post {
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn({ name: "user_id" })
   user: User;
+
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[];
 }
