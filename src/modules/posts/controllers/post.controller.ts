@@ -73,6 +73,55 @@ class PostController {
       res.status(500).send({ ok: false, error: "Error Listing Posts" });
     }
   }
+
+  async updatePost(req: Request, res: Response) {
+    const { post_id } = req.params;
+    const { description } = req.body;
+
+    try {
+      const post = await AppDataSource.getRepository(Post).findOne({
+        where: { id: +post_id },
+      });
+
+      if (!post) {
+        return res.status(404).json({ ok: false, error: "Post Not Found" });
+      }
+
+      if (description) post.description = description;
+
+      await AppDataSource.getRepository(Post).save(post);
+      console.log(`Post ${post.id} Updated`);
+
+      return res.status(200).json({ ok: true, post });
+    } catch (error) {
+      console.log(error, "Error In UpdatePost");
+      res.status(500).send({ ok: false, error: "Error Updating Post" });
+    }
+  }
+
+  async deletePost(req: Request, res: Response) {
+    const { post_id } = req.params;
+
+    try {
+      const post = await AppDataSource.getRepository(Post).findOne({
+        where: { id: +post_id },
+      });
+
+      if (!post) {
+        return res.status(404).json({ ok: false, error: "Post Not Found" });
+      }
+
+      await AppDataSource.getRepository(Post).softRemove(post);
+      console.log(`Post ${post.id} Deleted`);
+
+      return res
+        .status(200)
+        .json({ ok: true, message: "Post Deleted Successfully" });
+    } catch (error) {
+      console.log(error, "Error In DeletePost");
+      res.status(500).send({ ok: false, error: "Error Deleting Post" });
+    }
+  }
 }
 
 export default new PostController();
