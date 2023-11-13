@@ -8,11 +8,12 @@ export const UserRoutes = (): Router => {
 
   // POST /users
   router.post("/", validateUserCreationMiddleware, UserController.createUser);
+  
   // GET /users
   router.get("/", UserController.findAllUsers);
 
   // GET /users/:user_id
-  router.get("/by_id/:user_id", UserController.findUserById);
+  router.get("/:user_id", UserController.findUserById);
 
   // DELETE /users/:user_id
   router.delete("/:user_id", UserController.deleteUser);
