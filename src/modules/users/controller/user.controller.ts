@@ -115,7 +115,7 @@ class UserController {
         return res.status(404).json({ ok: false, error: "User Not Found" });
       }
 
-      await AppDataSource.getRepository(User).softDelete(user);
+      await AppDataSource.getRepository(User).softRemove(user);
       console.log(`User ${user.id} Deleted`);
 
       return res
