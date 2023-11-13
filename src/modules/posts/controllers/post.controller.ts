@@ -38,7 +38,6 @@ class PostController {
   async findPostsByUserAuth(req: Request, res: Response) {
     try {
       const requestingUser = res.locals.user as User;
-      console.log(requestingUser, "requestingUser");
 
       const posts = await AppDataSource.getRepository(Post).find({
         where: { user_id: requestingUser.id },
