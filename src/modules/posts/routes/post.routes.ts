@@ -18,5 +18,11 @@ export const PostRoutes = (): Router => {
   // GET /posts/:user_id
   router.get("/:user_id", PostController.findPostsByUserId);
 
+  // DELETE /posts/:post_id
+  router.delete("/:post_id", PostController.deletePost);
+
+  // PATCH /posts/:post_id
+  router.patch("/:post_id", PostController.updatePost);
+
   return router;
 };
