@@ -35,6 +35,13 @@ src
                   └───comment.entity.ts
             └───routes
                   └───comment.routes.ts
+      └───likes
+            └───controller
+                  └───like.controller.ts
+            └───entities
+                  └───like.entity.ts
+            └───routes
+                  └───like.routes.ts
       └───posts
             └───controller
                   └───post.controller.ts
@@ -75,13 +82,13 @@ yarn.lock
 - [X] **Usuário:** Com informações como nome de usuário, senha, e-mail, bio e número de seguidores/seguindo. 
 - [X] **Publicação:** Contendo dados como imagem, legenda, data/hora de postagem.
 - [X] **Comentário:** Relacionado a uma publicação e a um usuário, com texto e data/hora de postagem.
-- [ ] **Curtida:** Associada a uma publicação e a um usuário.
+- [X] **Curtida:** Associada a uma publicação e a um usuário.
 - [ ] **Bônus:** Story
 
 **Relacionamentos Principais:**
 
 - [X] Um usuário pode ter **muitas publicações**.
-- [ ] Uma publicação pode receber **muitos comentários** e **muitas curtidas**.
+- [X] Uma publicação pode receber **muitos comentários** e **muitas curtidas**.
 - [X] Um comentário está **associado a um único usuário e a uma única publicação**.
 
 **Requisitos Funcionais Básicos:**
@@ -89,7 +96,7 @@ yarn.lock
 - [X] **Autenticação de Usuário:** Permitir que usuários se cadastrem e façam login.
 - [X] **Publicar Conteúdo:** Usuários podem criar publicações com uma legenda.
 - [X] **Comentar Publicações:** Comentar e remover comentários em publicações existentes.
-- [ ] **Curtir e descurtir Publicações:** Usuários podem dar "like" em publicações.
+- [X] **Curtir e descurtir Publicações:** Usuários podem dar "like" em publicações.
 - [ ] **Feed de Publicações:** Mostrar as publicações dos usuários que o usuário atual segue.
 
 ## 🕹️ Execução do Projeto <a name="execucao"></a>
