@@ -8,7 +8,7 @@ export const CommentRoutes = (): Router => {
   // POST /comments/:post_id
   router.post("/:post_id", validateJwtUser, CommentController.createComment);
 
-  // DELETE /comments/:post_id/:comment_id
+  // DELETE /comments/:comment_id
   router.delete("/:comment_id", CommentController.deleteComment);
 
   return router;
