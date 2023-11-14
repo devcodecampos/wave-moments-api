@@ -12,6 +12,14 @@ class CommentController {
     try {
       const requestingUser = res.locals.user as User;
 
+      const post = await AppDataSource.getRepository(Post).findOne({
+        where: { id: +post_id },
+      });
+
+      if (!post) {
+        return res.status(404).json({ ok: false, error: "Post Not Found" });
+      }
+
       const comment = await AppDataSource.getRepository(Comment).save({
         text,
         post_id: +post_id,
