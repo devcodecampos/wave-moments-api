@@ -5,6 +5,7 @@
   <a href="#estrutura">Estrutura do Projeto</a>&nbsp;|&nbsp;
   <a href="#funcionalidades">Funcionalidades</a>&nbsp;|&nbsp;
   <a href="#execucao">Execução</a>&nbsp;|&nbsp;
+  <a href="#api-collection">API Collection</a>&nbsp;|&nbsp;
   <a href="#dependencias">Dependencias</a>&nbsp;|&nbsp;
   <a href="#license">Licença</a>
 </p>
@@ -29,21 +30,21 @@ src
             └───validate-user-auth.middleware.ts      
 └───modules
       └───comments
-            └───controller
+            └───controllers
                   └───comment.controller.ts
             └───entities
                   └───comment.entity.ts
             └───routes
                   └───comment.routes.ts
       └───likes
-            └───controller
+            └───controllers
                   └───like.controller.ts
             └───entities
                   └───like.entity.ts
             └───routes
                   └───like.routes.ts
       └───posts
-            └───controller
+            └───controllers
                   └───post.controller.ts
             └───entities
                   └───post.entity.ts
@@ -52,7 +53,7 @@ src
             └───routes
                   └───post.routes.ts
       └───users
-            └───controller
+            └───controllers
                   └───user.controller.ts
             └───entities
                   └───user.entity.ts
@@ -119,6 +120,9 @@ DATABASE_NAME = wave_moments "O nome do banco ao qual deseja se conectar"
 SERVER_PORT=3333 "A porta na qual o servidor do seu aplicativo será executado"
 JWT_SECRET = JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ "A sua chave secreta do JWT"
 ```
+
+## 📑 API Collection <a name="api-collection"></a>
+[Insomnia-Collection](https://drive.google.com/drive/folders/1gRiF1-hlSSyN_Bg7bHRln2RebJ4FgGNW?usp=sharing)
 
 ## 📚 Dependencias <a name="dependencias"></a>
 [Typescript](https://www.typescriptlang.org/download)
