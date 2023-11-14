@@ -5,25 +5,20 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Post } from "../../posts/entities/post.entity";
 import { User } from "../../users/entities/user.entity";
-import { Comment } from "../../comments/entities/comment.entity";
-import { Like } from "../../likes/entities/like.entity";
 
-@Entity("posts")
-export class Post {
+@Entity("likes")
+export class Like {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  image_url: string;
+  post_id: number;
 
-  @Column({ nullable: true })
-  description: string;
-  
   @Column()
   user_id: number;
 
@@ -36,13 +31,11 @@ export class Post {
   @DeleteDateColumn()
   deleted_at: Date;
 
-  @ManyToOne(() => User, (user) => user.posts)
+  @ManyToOne(() => Post, (post) => post.likes)
+  @JoinColumn({ name: "post_id" })
+  post: Post;
+
+  @ManyToOne(() => User, (user) => user.likes)
   @JoinColumn({ name: "user_id" })
   user: User;
-
-  @OneToMany(() => Comment, (comment) => comment.post)
-  comments: Comment[];
-
-  @OneToMany(() => Like, (like) => like.post)
-  likes: Like[];
 }
